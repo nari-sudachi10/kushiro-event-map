@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>道東イベントナビ</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+        }
+
+        header {
+            background-color: #287c70;
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .search-area {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        input, select {
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+
+        input {
+            flex: 1;
+        }
+
+        .events {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+        }
+
+        .event-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 8px #00000010;
+        }
+
+        .event-card h2 {
+            color: #287c70;
+            font-size: 20px;
+        }
+
+        .genre {
+            display: inline-block;
+            background: #e0f2ef;
+            color: #287c70;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 13px;
+        }
+
+        .event-card button {
+            background: #287c70;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .event-card button:hover {
+            background: #1d5e55;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: #777;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>道東イベントナビ</h1>
+    <p>道東の小さなお祭り・イベントを見つけよう！</p>
+</header>
+
+<main class="container">
+
+    <h2>イベントを探す</h2>
+
+    <div class="search-area">
+        <input
+            type="text"
+            id="search"
+            placeholder="イベント名・地域で検索"
+        >
+
+        <select id="genre">
+            <option value="all">すべてのジャンル</option>
+            <option value="祭り">祭り</option>
+            <option value="グルメ">グルメ</option>
+            <option value="音楽">音楽</option>
+        </select>
+    </div>
+
+    <h2>開催予定のイベント</h2>
+
+    <div class="events" id="event-list"></div>
+
+</main>
+
+<footer>
+    &copy; 2026 道東イベントナビ
+</footer>
+
+<script>
+    // 仮のイベントデータ
+    const events = [
+        {
+            name: "道東夏祭り",
+            area: "釧路市",
+            date: "2026年7月25日",
+            genre: "祭り",
+            description: "地域の人々が集まる夏祭りです。"
+        },
+        {
+            name: "地元グルメフェスタ",
+            area: "帯広市",
+            date: "2026年8月10日",
+            genre: "グルメ",
+            description: "道東のおいしい食べ物が集まります。"
+        },
+        {
+            name: "地域音楽イベント",
+            area: "北見市",
+            date: "2026年8月20日",
+            genre: "音楽",
+            description: "地元の音楽グループによる演奏会です。"
+        }
+    ];
+
+    const eventList = document.getElementById("event-list");
+    const searchInput = document.getElementById("search");
+    const genreSelect = document.getElementById("genre");
+
+    // イベントを画面に表示する関数
+    function displayEvents() {
+        const keyword = searchInput.value.toLowerCase();
+        const genre = genreSelect.value;
+
+        eventList.innerHTML = "";
+
+        const filteredEvents = events.filter(event => {
+            const matchesKeyword =
+                event.name.toLowerCase().includes(keyword) ||
+                event.area.toLowerCase().includes(keyword);
+
+            const matchesGenre =
+                genre === "all" || event.genre === genre;
+
+            return matchesKeyword && matchesGenre;
+        });
+
+        if (filteredEvents.length === 0) {
+            eventList.textContent = "イベントが見つかりませんでした。";
+            return;
+        }
+
+        filteredEvents.forEach(event => {
+            const card = document.createElement("div");
+            card.className = "event-card";
+
+            const title = document.createElement("h2");
+            title.textContent = event.name;
+
+            const genreLabel = document.createElement("span");
+            genreLabel.className = "genre";
+            genreLabel.textContent = event.genre;
+
+            const area = document.createElement("p");
+            area.textContent = "開催地域：" + event.area;
+
+            const date = document.createElement("p");
+            date.textContent = "開催日：" + event.date;
+
+            const description = document.createElement("p");
+            description.textContent = event.description;
+
+            const button = document.createElement("button");
+            button.textContent = "詳細を見る";
+            button.addEventListener("click", () => {
+                alert(
+                    event.name + "\n" +
+                    event.area + "\n" +
+                    event.date + "\n\n" +
+                    event.description
+                );
+            });
+
+            card.append(
+                title,
+                genreLabel,
+                area,
+                date,
+                description,
+                button
+            );
+
+            eventList.appendChild(card);
+        });
+    }
+
+    // 検索・ジャンル変更時に再表示
+    searchInput.addEventListener("input", displayEvents);
+    genreSelect.addEventListener("change", displayEvents);
+
+    // 最初の表示
+    displayEvents();
+</script>
+
+</body>
+</html>
