@@ -19,4 +19,5 @@
 - CSS
 - python
 - Massaging API
+- supabase
 - GitHub
