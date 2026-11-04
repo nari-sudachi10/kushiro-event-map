@@ -20,4 +20,5 @@
 - python
 - Massaging API
 - supabase
+- fastapi
 - GitHub
