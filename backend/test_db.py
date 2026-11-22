@@ -1,0 +1,12 @@
+from sqlalchemy import text
+from database import engine
+
+try:
+    with engine.connect() as connection:
+        result = connection.execute(text("SELECT version();"))
+        print("データベース接続成功！")
+        print(result.fetchone())
+
+except Exception as e:
+    print("データベース接続失敗")
+    print(e)

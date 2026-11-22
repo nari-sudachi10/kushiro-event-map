@@ -223,3 +223,14 @@ venv/
 __pycache__/
 *.pyc
 .env
+
+# Python virtual environment
+p230124/
+
+# Uploaded images
+uploads/
+
+# Backup files
+*.bak
+
+.ruff_cache/
