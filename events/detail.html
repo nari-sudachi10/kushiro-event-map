@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>イベント詳細 | 地域ナビ</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: sans-serif;
+            background-color: #f5f7f2;
+            color: #333;
+        }
+    
+        header {
+            background-color: #315f4b;
+            color: white;
+            padding: 20px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    
+        header h1 {
+            margin: 0;
+        }
+    
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+        }
+    
+        main {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+    
+        section {
+            background-color: white;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+        }
+    
+        h2 {
+            color: #315f4b;
+        }
+    
+        .event-detail img {
+            width: 100%;
+            max-height: 350px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+    
+        #map {
+            background-color: #e3ebe4;
+            height: 250px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            color: #315f4b;
+        }
+    
+        .back-link {
+            color: #315f4b;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>地域ナビ</h1>
+        <nav>
+            <a href="chiiki_navi_home.html">ホーム</a>
+            <a href="chiiki_navi_events.html">イベント一覧</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- イベント情報 -->
+        <section class="event-detail">
+
+            <h2>釧路市民まつり</h2>
+
+            <img src="event.jpg" alt="イベント画像">
+
+            <p>開催日時：2026年6月12日</p>
+            <p>開催場所：釧路市</p>
+
+        </section>
+
+        <!-- イベント説明 -->
+        <section class="event-description">
+            <h2>イベントについて</h2>
+            <p>
+                ここにイベントの詳しい説明を表示します。
+            </p>
+        </section>
+
+        <!-- 地図 -->
+        <section class="event-map">
+            <h2>開催場所・アクセス</h2>
+            <div id="map">
+                地図を表示する場所
+            </div>
+        </section>
+
+        <a class="back-link" href="chiiki_navi_events.html">
+            ← イベント一覧に戻る
+        </a>
+
+    </main>
+
+</body>
+</html>

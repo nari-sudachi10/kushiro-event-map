@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>地域ナビ｜主催者ページ</title>
+<style>
+:root{--green:#087c68;--deep:#075b54;--mint:#eaf7f2;--orange:#f39a42;--ink:#203536;--muted:#718281;--line:#e2ebe7;--bg:#f4f8f6;--red:#dc5b54}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans JP","Yu Gothic",Meiryo,sans-serif;font-size:14px}
+button,input,select,textarea{font:inherit}button{cursor:pointer}.topbar{height:66px;background:linear-gradient(100deg,#087e6b,#075d59);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 max(22px,calc((100% - 1220px)/2));box-shadow:0 3px 12px #174b401c}
+.logo{display:flex;align-items:center;gap:11px;font-size:21px;font-weight:800;letter-spacing:.03em}.logo-icon{width:37px;height:37px;border:2px solid #fff;border-radius:10px;display:grid;place-items:center;font-size:22px}.topright{font-size:11px;opacity:.9}.layout{max-width:1220px;margin:25px auto;padding:0 20px;display:grid;grid-template-columns:235px 1fr;gap:22px}
+.sidebar{background:#fff;border:1px solid var(--line);border-radius:17px;padding:15px;height:max-content;position:sticky;top:18px;box-shadow:0 6px 22px #164d3e08}
+.org-label{background:linear-gradient(110deg,#087d6b,#075c56);color:white;border-radius:12px;padding:15px 13px;margin-bottom:14px}.org-label strong{display:block;font-size:17px}.org-label span{font-size:10px;opacity:.85}
+.nav-title{font-size:10px;color:#92a09c;font-weight:800;letter-spacing:.12em;padding:12px 8px 7px}.nav button{width:100%;border:0;background:transparent;text-align:left;padding:11px 10px;border-radius:9px;color:#526461;font-size:12px;font-weight:700;margin:2px 0;display:flex;align-items:center;gap:10px}.nav button .ico{width:22px;text-align:center;font-size:16px}.nav button:hover,.nav button.active{background:#e7f5ef;color:#087360}.side-note{margin-top:17px;padding:12px;background:#f4f8f5;border-radius:10px;font-size:10px;line-height:1.8;color:#71817b}
+main{min-width:0}.page{display:none}.page.active{display:block}.page-head{display:flex;justify-content:space-between;align-items:flex-start;margin:4px 0 18px;gap:15px}.eyebrow{font-size:10px;color:#0b8a72;font-weight:800;letter-spacing:.12em;margin-bottom:5px}.page-head h1{font-size:23px;margin:0 0 6px}.page-head p{margin:0;color:var(--muted);font-size:11px;line-height:1.7}
+.btn{border:0;border-radius:8px;background:var(--green);color:#fff;padding:11px 17px;font-size:11px;font-weight:800;box-shadow:0 3px 8px #087c6820}.btn:hover{background:var(--deep)}.btn.orange{background:var(--orange)}.btn.gray{background:#eef3f0;color:#53635f;box-shadow:none}.btn.red{background:var(--red)}.btn.small{padding:7px 11px;font-size:10px}.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:0 5px 18px #164d3e08;margin-bottom:15px}.card h2{font-size:14px;margin:0 0 14px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:15px}.stat{background:#fff;border:1px solid var(--line);border-radius:13px;padding:15px}.stat span{display:block;font-size:10px;color:var(--muted);margin-bottom:8px}.stat strong{font-size:25px;color:var(--green)}.stat small{font-size:10px;color:#92a09c;margin-left:4px}
+.grid2{display:grid;grid-template-columns:1.15fr .85fr;gap:15px}.activity{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid #edf1ee;font-size:11px}.activity:last-child{border:0}.activity small{display:block;color:var(--muted);font-size:10px;margin-top:4px}.pill{display:inline-block;border-radius:20px;padding:4px 9px;font-size:9px;font-weight:800;white-space:nowrap;background:#e9f7ee;color:#25814e}.pill.wait{background:#fff3dc;color:#b87913}.pill.reject{background:#ffebea;color:#c94d47}.pill.gray{background:#edf1ef;color:#65716d}
+.quick{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.quick button{border:1px solid var(--line);background:#fbfdfb;border-radius:10px;padding:14px;text-align:left;color:var(--ink)}.quick b{display:block;font-size:11px;margin:5px 0}.quick span{font-size:10px;color:var(--muted)}.quick .qico{font-size:20px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.field.full{grid-column:1/-1}.field label{display:block;font-size:10px;font-weight:800;color:#596b66;margin:0 0 6px}.field input,.field select,.field textarea{width:100%;border:1px solid #dfe8e3;border-radius:8px;padding:11px;background:#fcfdfc;outline:none;font-size:11px;color:var(--ink)}.field textarea{min-height:85px;resize:vertical}.field input:focus,.field select:focus,.field textarea:focus{border-color:#0b947b}.help{font-size:9px;color:#8b9994;margin-top:5px}.actions{display:flex;gap:8px;justify-content:flex-end;margin-top:16px;flex-wrap:wrap}
+.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;min-width:570px}th,td{text-align:left;padding:12px 10px;border-bottom:1px solid #edf1ee;font-size:10px}th{background:#f7faf8;color:#667772;font-weight:800}td strong{font-size:11px}.empty{text-align:center;padding:25px;color:var(--muted);font-size:11px}
+.notice{padding:12px 14px;border-radius:10px;background:#edf7f3;color:#376b5c;font-size:10px;line-height:1.8;margin-bottom:14px}.notice.warn{background:#fff5e6;color:#91621e}
+.auth{max-width:540px;margin:25px auto}.auth .card{padding:25px}.auth-title{text-align:center;margin-bottom:20px}.auth-title .big{font-size:32px}.auth-title h2{margin:8px 0 5px;font-size:19px}.auth-title p{font-size:10px;color:var(--muted)}
+.tabs{display:flex;gap:6px;background:#f1f6f3;padding:5px;border-radius:9px;margin-bottom:17px}.tabs button{flex:1;border:0;background:transparent;border-radius:7px;padding:9px;font-size:11px;color:#71817b}.tabs button.active{background:white;color:var(--green);font-weight:800;box-shadow:0 2px 7px #163c3210}
+.upload{border:1px dashed #a9c9bc;background:#f8fcf9;border-radius:12px;padding:24px;text-align:center}.upload strong{display:block;font-size:12px;margin:7px}.upload p{font-size:10px;color:var(--muted)}.upload input{max-width:100%;font-size:10px}
+.preview{display:none;margin-top:12px;padding:12px;background:#f4f8f5;border-radius:10px;font-size:10px}.preview img{max-width:100%;max-height:220px;display:block;margin:0 auto 10px;border-radius:8px}
+.linebox{text-align:center;padding:22px}.line-logo{width:70px;height:70px;background:#06c755;color:white;border-radius:20px;display:grid;place-items:center;font-size:35px;margin:0 auto 12px}.linebox h3{font-size:15px}.linebox p{font-size:10px;color:var(--muted);line-height:1.9;max-width:390px;margin:0 auto 15px}
+footer{text-align:center;padding:20px;color:#9aa9a3;font-size:9px}
+@media(max-width:850px){.layout{grid-template-columns:1fr;margin-top:14px}.sidebar{position:static;padding:10px}.org-label{display:none}.nav-title,.side-note{display:none}.nav{display:flex;overflow:auto;gap:5px}.nav button{width:auto;white-space:nowrap;padding:10px}.nav button .ico{display:none}.stats{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.topbar{padding:0 14px}.logo{font-size:16px}.topright{display:none}.layout{padding:0 12px}.grid2,.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.page-head{display:block}.page-head .btn{margin-top:12px}.stats{gap:8px}.stat{padding:11px}.stat strong{font-size:21px}.card{padding:14px}}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="logo"><span class="logo-icon">▦</span>地域ナビ <span style="font-size:12px;font-weight:500;opacity:.85">｜主催者ページ</span></div><div class="topright">釧路・道東のイベントをつなぐ地域イベント情報サービス</div></header>
+<div class="layout">
+<aside class="sidebar">
+ <div class="org-label"><strong>▣ 主催者メニュー</strong><span>イベントを投稿・管理する</span></div>
+ <div class="nav-title">ACCOUNT</div>
+ <nav class="nav">
+  <button class="active" data-page="dashboard"><span class="ico">⌂</span>マイページ</button>
+  <button data-page="register"><span class="ico">＋</span>主催者登録</button>
+  <button data-page="login"><span class="ico">↪</span>ログイン</button>
+ </nav>
+ <div class="nav-title">EVENT MANAGEMENT</div>
+ <nav class="nav">
+  <button data-page="status"><span class="ico">◷</span>申請状況確認</button>
+  <button data-page="events"><span class="ico">▤</span>イベント管理</button>
+  <button data-page="flyer"><span class="ico">▧</span>チラシ読み取り</button>
+ </nav>
+ <div class="nav-title">CONNECTION</div>
+ <nav class="nav"><button data-page="line"><span class="ico">●</span>LINE連携</button></nav>
+ <div class="side-note">💡 イベントを登録すると、管理者の確認後に地域ナビへ掲載されます。</div>
+</aside>
+<main>
+<section class="page active" id="dashboard">
+ <div class="page-head"><div><div class="eyebrow">ORGANIZER HOME</div><h1>主催者マイページ</h1><p>イベントの申請状況や管理情報を確認できます。</p></div><button class="btn" onclick="go('events')">＋ イベントを登録</button></div>
+ <div class="stats"><div class="stat"><span>申請中のイベント</span><strong id="statPending">2</strong><small>件</small></div><div class="stat"><span>公開中のイベント</span><strong id="statPublic">3</strong><small>件</small></div><div class="stat"><span>修正依頼</span><strong>1</strong><small>件</small></div><div class="stat"><span>登録イベント合計</span><strong id="statTotal">6</strong><small>件</small></div></div>
+ <div class="grid2"><div class="card"><h2>最近の申請・更新</h2><div class="activity"><div><b>釧路市民まつり</b><small>イベント情報を申請しました</small></div><span class="pill wait">審査中</span></div><div class="activity"><div><b>冬のまちフェス</b><small>公開が承認されました</small></div><span class="pill">公開中</span></div><div class="activity"><div><b>春のマルシェ</b><small>掲載内容の修正をお願いします</small></div><span class="pill reject">修正依頼</span></div></div>
+ <div class="card"><h2>よく使うメニュー</h2><div class="quick"><button onclick="go('events')"><span class="qico">📝</span><b>イベント登録</b><span>新しいイベントを申請</span></button><button onclick="go('status')"><span class="qico">📋</span><b>申請状況</b><span>審査の進み具合を確認</span></button><button onclick="go('flyer')"><span class="qico">🖼️</span><b>チラシ読み取り</b><span>画像から内容を入力</span></button><button onclick="go('line')"><span class="qico">💬</span><b>LINE連携</b><span>通知を受け取る</span></button></div></div></div>
+ <div class="notice">現在はデモ画面です。表示されているイベント・申請状況はサンプルデータです。</div>
+</section>
+
+<section class="page" id="register">
+ <div class="page-head"><div><div class="eyebrow">ORGANIZER REGISTRATION</div><h1>主催者登録</h1><p>団体・事業者の情報を入力して、主催者アカウントを作成します。</p></div></div>
+ <div class="card"><h2>主催者情報</h2><form id="registerForm"><div class="form-grid">
+ <div class="field"><label>団体名・事業者名 *</label><input required placeholder="例：地域イベント実行委員会"></div>
+ <div class="field"><label>代表者名 *</label><input required placeholder="例：山田 太郎"></div>
+ <div class="field"><label>メールアドレス *</label><input type="email" required placeholder="example@mail.com"></div>
+ <div class="field"><label>電話番号</label><input type="tel" placeholder="000-0000-0000"></div>
+ <div class="field full"><label>団体・事業者の住所</label><input placeholder="例：北海道釧路市○○町"></div>
+ <div class="field"><label>パスワード *</label><input type="password" required minlength="8" placeholder="8文字以上"></div>
+ <div class="field"><label>パスワード（確認） *</label><input type="password" required minlength="8" placeholder="もう一度入力"></div>
+ <div class="field full"><label>団体・事業者の紹介</label><textarea placeholder="活動内容や主催イベントについて入力してください"></textarea></div>
+ </div><div class="actions"><button type="reset" class="btn gray">入力をリセット</button><button class="btn" type="submit">登録内容を確認する →</button></div></form></div>
+</section>
+
+<section class="page" id="login">
+ <div class="auth"><div class="card"><div class="auth-title"><div class="big">🔐</div><h2>主催者ログイン</h2><p>登録したメールアドレスでログインしてください。</p></div><form id="loginForm"><div class="field" style="margin-bottom:13px"><label>メールアドレス</label><input type="email" required placeholder="example@mail.com"></div><div class="field"><label>パスワード</label><input type="password" required placeholder="パスワードを入力"></div><div class="actions"><button class="btn" type="submit" style="width:100%">ログイン</button></div></form><p style="text-align:center;font-size:10px;color:var(--muted);margin:17px 0 0">アカウントをお持ちでない方は <a href="#" onclick="go('register');return false" style="color:var(--green);font-weight:bold">主催者登録</a></p></div></div>
+</section>
+
+<section class="page" id="status">
+ <div class="page-head"><div><div class="eyebrow">APPLICATION STATUS</div><h1>イベント申請状況</h1><p>申請したイベントの審査状況を確認できます。</p></div></div>
+ <div class="card"><div class="table-wrap"><table><thead><tr><th>イベント名</th><th>申請日</th><th>ステータス</th><th>確認・操作</th></tr></thead><tbody id="statusRows">
+ <tr><td><strong>釧路市民まつり</strong></td><td>11/24</td><td><span class="pill wait">審査中</span></td><td>管理者の確認待ち</td></tr>
+ <tr><td><strong>冬のまちフェス</strong></td><td>11/20</td><td><span class="pill">公開承認済み</span></td><td>掲載ページを確認</td></tr>
+ <tr><td><strong>春のマルシェ</strong></td><td>11/18</td><td><span class="pill reject">修正依頼</span></td><td><button class="btn small" onclick="go('events')">内容を修正</button></td></tr>
+ </tbody></table></div></div>
+ <div class="notice warn">修正依頼が届いた場合は、イベント管理から内容を修正して再申請してください。</div>
+</section>
+
+<section class="page" id="events">
+ <div class="page-head"><div><div class="eyebrow">MY EVENTS</div><h1>イベント管理</h1><p>イベントの新規登録、内容の編集、削除ができます。</p></div><button class="btn" onclick="newEvent()">＋ 新規イベント</button></div>
+ <div class="card"><h2 id="eventFormTitle">イベント情報を登録</h2><form id="eventForm"><input type="hidden" id="editId"><div class="form-grid">
+ <div class="field full"><label>イベント名 *</label><input id="evTitle" required placeholder="イベント名を入力"></div>
+ <div class="field"><label>カテゴリ *</label><select id="evCategory" required><option value="">選択してください</option><option>お祭り・フェス</option><option>音楽</option><option>グルメ・マルシェ</option><option>スポーツ</option><option>文化・アート</option><option>その他</option></select></div>
+ <div class="field"><label>開催エリア *</label><input id="evArea" required placeholder="例：北海道釧路市"></div>
+ <div class="field"><label>開催開始日時 *</label><input id="evStart" type="datetime-local" required></div>
+ <div class="field"><label>開催終了日時</label><input id="evEnd" type="datetime-local"></div>
+ <div class="field full"><label>開催場所・住所 *</label><input id="evPlace" required placeholder="会場名・住所を入力"></div>
+ <div class="field"><label>参加費</label><input id="evPrice" placeholder="例：無料、1,000円"></div>
+ <div class="field"><label>問い合わせ先</label><input id="evContact" placeholder="電話番号・メールアドレス"></div>
+ <div class="field full"><label>イベント内容 *</label><textarea id="evDesc" required placeholder="イベントの内容や見どころを入力してください"></textarea></div>
+ </div><div class="actions"><button type="button" class="btn gray" onclick="clearEventForm()">クリア</button><button type="submit" class="btn">申請する →</button></div></form></div>
+ <div class="card"><h2>登録済みイベント</h2><div class="table-wrap"><table><thead><tr><th>イベント名</th><th>開催日</th><th>ステータス</th><th>操作</th></tr></thead><tbody id="eventRows"></tbody></table></div></div>
+</section>
+
+<section class="page" id="flyer">
+ <div class="page-head"><div><div class="eyebrow">FLYER READER</div><h1>チラシ読み取り・内容確認</h1><p>イベントチラシの画像を選択し、読み取った情報を確認・編集します。</p></div></div>
+ <div class="card"><h2>① チラシ画像をアップロード</h2><div class="upload"><div style="font-size:28px">🖼️</div><strong>チラシ画像を選択してください</strong><p>JPG・PNG形式に対応しています。</p><input type="file" id="flyerFile" accept="image/*"></div><div class="preview" id="flyerPreview"></div></div>
+ <div class="card"><h2>② 読み取り内容の確認</h2><div class="notice warn">このサンプルでは画像の文字を自動認識するOCR機能は未接続です。画像を見ながら下記項目に入力してください。</div><div class="form-grid">
+ <div class="field full"><label>イベント名</label><input id="flyTitle" placeholder="チラシに記載されたイベント名"></div><div class="field"><label>開催日</label><input id="flyDate" type="date"></div><div class="field"><label>開催時間</label><input id="flyTime" placeholder="例：10:00〜16:00"></div><div class="field full"><label>開催場所</label><input id="flyPlace" placeholder="会場・住所"></div><div class="field full"><label>イベント内容</label><textarea id="flyDesc" placeholder="チラシの内容を入力"></textarea></div></div><div class="actions"><button class="btn" onclick="copyFlyer()">イベント登録フォームへ反映 →</button></div></div>
+</section>
+
+<section class="page" id="line">
+ <div class="page-head"><div><div class="eyebrow">LINE CONNECTION</div><h1>LINE連携</h1><p>LINEと連携して、申請状況やお知らせを受け取ります。</p></div></div>
+ <div class="card linebox"><div class="line-logo">LINE</div><h3>LINEと連携して便利に使おう</h3><p>イベントの審査結果や修正依頼、新しいお知らせをLINEで受け取れるようになります。連携設定は実際のLINE公式アカウントとの接続後に利用できます。</p><button class="btn" onclick="alert('デモ画面です。実際のLINE連携にはLINE公式アカウント・Messaging API等の設定が必要です。')">LINE連携を設定する</button></div>
+ <div class="card"><h2>連携するとできること</h2><div class="activity"><div><b>申請状況のお知らせ</b><small>イベントの審査結果を通知します。</small></div><span class="pill">通知</span></div><div class="activity"><div><b>修正依頼の受け取り</b><small>管理者からの修正依頼を確認できます。</small></div><span class="pill">通知</span></div><div class="activity"><div><b>掲載開始のお知らせ</b><small>イベント公開時に通知します。</small></div><span class="pill">通知</span></div></div>
+</section>
+</main></div>
+<footer>© 2026 地域ナビ｜主催者向け管理ページ（デモ）</footer>
+<script>
+const pages=['dashboard','register','login','status','events','flyer','line'];
+function go(id){document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id===id));document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===id));window.scrollTo({top:0,behavior:'smooth'});}
+document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>go(b.dataset.page)));
+document.getElementById('registerForm').addEventListener('submit',e=>{e.preventDefault();alert('登録内容を受け付けました。（デモ）実際のアカウント登録にはサーバー側の処理が必要です。');});
+document.getElementById('loginForm').addEventListener('submit',e=>{e.preventDefault();alert('ログイン機能はデモ表示です。実際の認証にはサーバー側の設定が必要です。');});
+let records=[
+{id:1,title:'釧路市民まつり',date:'2026/12/06',status:'審査中',area:'釧路市'},
+{id:2,title:'冬のまちフェス',date:'2026/12/12',status:'公開中',area:'釧路市'},
+{id:3,title:'春のマルシェ',date:'2027/03/20',status:'修正依頼',area:'釧路市'}
+];
+function renderEvents(){
+ const body=document.getElementById('eventRows');body.innerHTML='';
+ records.forEach(r=>{const tr=document.createElement('tr');let cls=r.status==='公開中'?'':'wait';if(r.status==='修正依頼')cls='reject';tr.innerHTML=`<td><strong>${escapeHtml(r.title)}</strong><br><span style="color:#899791">${escapeHtml(r.area||'')}</span></td><td>${escapeHtml(r.date||'未設定')}</td><td><span class="pill ${cls}">${r.status}</span></td><td><button class="btn small gray" onclick="editEvent(${r.id})">編集</button> <button class="btn small red" onclick="deleteEvent(${r.id})">削除</button></td>`;body.appendChild(tr);});
+ document.getElementById('statTotal').textContent=records.length;document.getElementById('statPending').textContent=records.filter(r=>r.status!=='公開中').length;document.getElementById('statPublic').textContent=records.filter(r=>r.status==='公開中').length;
+}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function newEvent(){clearEventForm();document.getElementById('eventFormTitle').textContent='イベント情報を登録';document.getElementById('evTitle').focus();}
+function clearEventForm(){document.getElementById('eventForm').reset();document.getElementById('editId').value='';document.getElementById('eventFormTitle').textContent='イベント情報を登録';}
+function editEvent(id){const r=records.find(x=>x.id===id);if(!r)return;document.getElementById('editId').value=id;document.getElementById('evTitle').value=r.title;document.getElementById('evArea').value=r.area||'';document.getElementById('eventFormTitle').textContent='イベント情報を編集';window.scrollTo({top:document.getElementById('eventForm').getBoundingClientRect().top+window.scrollY-90,behavior:'smooth'});}
+function deleteEvent(id){if(confirm('このイベントを削除しますか？')){records=records.filter(r=>r.id!==id);renderEvents();}}
+document.getElementById('eventForm').addEventListener('submit',e=>{e.preventDefault();const id=Number(document.getElementById('editId').value);const title=document.getElementById('evTitle').value;const area=document.getElementById('evArea').value;const date=document.getElementById('evStart').value?document.getElementById('evStart').value.slice(0,10).replaceAll('-','/'):'未設定';if(id){const r=records.find(x=>x.id===id);r.title=title;r.area=area;r.date=date;}else{records.push({id:Date.now(),title,area,date,status:'審査中'});}renderEvents();clearEventForm();alert('イベント情報を保存しました。デモのため、この画面内でのみ反映されます。');});
+document.getElementById('flyerFile').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const box=document.getElementById('flyerPreview');const url=URL.createObjectURL(f);box.style.display='block';box.innerHTML=`<img src="${url}" alt="選択したチラシ"><div>選択ファイル：${escapeHtml(f.name)}</div>`;});
+function copyFlyer(){go('events');document.getElementById('evTitle').value=document.getElementById('flyTitle').value;document.getElementById('evPlace').value=document.getElementById('flyPlace').value;document.getElementById('evDesc').value=document.getElementById('flyDesc').value;alert('入力できる項目をイベント登録フォームへ反映しました。開催日・時間は必要に応じて入力してください。');}
+renderEvents();
+</script>
+</body></html>
